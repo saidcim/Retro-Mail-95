@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retro Mail 95 - Live Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="desktop" aria-label="Retro Mail 95">
+    <section class="window" aria-label="Mail viewer">
+      <header class="titlebar">
+        <div class="title-left">
+          <span class="app-icon" aria-hidden="true"></span>
+          <span>Retro Mail 95 - Inbox [Demo]</span>
+        </div>
+        <div class="window-buttons" aria-label="Window controls">
+          <button aria-label="Minimize" data-window-action="minimize"></button>
+          <button aria-label="Maximize" data-window-action="maximize"></button>
+          <button aria-label="Close" data-window-action="close"></button>
+        </div>
+      </header>
+
+      <nav class="menubar" aria-label="Application menu">
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="file" aria-haspopup="true" aria-expanded="false">File</button>
+          <div class="menu-panel" data-menu-panel="file" role="menu">
+            <button data-action="compose" role="menuitem">New Message</button>
+            <button data-action="refresh" role="menuitem">Refresh</button>
+            <button data-action="print" role="menuitem">Print Message</button>
+            <hr>
+            <button data-action="closeWindow" role="menuitem">Exit</button>
+          </div>
+        </div>
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="edit" aria-haspopup="true" aria-expanded="false">Edit</button>
+          <div class="menu-panel" data-menu-panel="edit" role="menu">
+            <button data-action="markRead" role="menuitem">Mark as Read</button>
+            <button data-action="markUnread" role="menuitem">Mark as Unread</button>
+            <button data-action="focusSearch" role="menuitem">Find...</button>
+          </div>
+        </div>
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="view" aria-haspopup="true" aria-expanded="false">View</button>
+          <div class="menu-panel" data-menu-panel="view" role="menu">
+            <button data-action="refresh" role="menuitem">Refresh</button>
+            <button data-action="toggleFolders" role="menuitem">Toggle Folder Pane</button>
+            <button data-action="toggleReader" role="menuitem">Toggle Reading Pane</button>
+          </div>
+        </div>
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="message" aria-haspopup="true" aria-expanded="false">Message</button>
+          <div class="menu-panel" data-menu-panel="message" role="menu">
+            <button data-action="compose" role="menuitem">New Message</button>
+            <button data-action="reply" role="menuitem">Reply</button>
+            <button data-action="forward" role="menuitem">Forward</button>
+            <hr>
+            <button data-action="archive" role="menuitem">Archive</button>
+            <button data-action="star" role="menuitem">Star / Unstar</button>
+          </div>
+        </div>
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="tools" aria-haspopup="true" aria-expanded="false">Tools</button>
+          <div class="menu-panel" data-menu-panel="tools" role="menu">
+            <button data-action="connect" role="menuitem">Connect Gmail</button>
+            <button data-action="disconnect" role="menuitem">Disconnect Gmail</button>
+            <hr>
+            <button data-action="toggleAutoRefresh" role="menuitem" id="autoRefreshMenuItem">Auto Refresh: On</button>
+          </div>
+        </div>
+        <div class="menu">
+          <button class="menu-trigger" data-menu-trigger="help" aria-haspopup="true" aria-expanded="false">Help</button>
+          <div class="menu-panel" data-menu-panel="help" role="menu">
+            <button data-action="about" role="menuitem">About Retro Mail 95</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="toolbar" aria-label="Mail actions">
+        <button class="tool" data-action="compose" title="New mail"><span class="tool-icon compose"></span><span>New</span></button>
+        <button class="tool" data-action="reply" title="Reply"><span class="tool-icon reply"></span><span>Reply</span></button>
+        <button class="tool" data-action="forward" title="Forward"><span class="tool-icon reply forward"></span><span>Forward</span></button>
+        <button class="tool" data-action="archive" title="Archive"><span class="tool-icon archive"></span><span>Archive</span></button>
+        <button class="tool" data-action="star" title="Star"><span class="tool-icon star"></span><span>Star</span></button>
+        <button class="tool" data-action="connect" title="Connect Gmail"><span class="tool-icon connect"></span><span>Connect</span></button>
+        <label class="search-box" aria-label="Search mail">
+          <span>Search:</span>
+          <input id="searchInput" type="search" autocomplete="off" spellcheck="false">
+        </label>
+      </div>
+
+      <div class="content">
+        <aside class="folders" aria-label="Folders">
+          <div class="pane-title">Mailboxes</div>
+          <button class="folder active" data-folder="Inbox"><span class="folder-icon"></span>Inbox <b data-count="Inbox">0</b></button>
+          <button class="folder" data-folder="Starred"><span class="folder-icon"></span>Starred <b data-count="Starred">0</b></button>
+          <button class="folder" data-folder="Sent"><span class="folder-icon"></span>Sent <b data-count="Sent">0</b></button>
+          <button class="folder" data-folder="Drafts"><span class="folder-icon"></span>Drafts <b data-count="Drafts">0</b></button>
+          <button class="folder" data-folder="Spam"><span class="folder-icon"></span>Spam <b data-count="Spam">0</b></button>
+          <button class="folder" data-folder="Archive"><span class="folder-icon"></span>Archive <b data-count="Archive">0</b></button>
+          <button class="folder" data-folder="All"><span class="folder-icon"></span>All Mail <b data-count="All">0</b></button>
+          <div class="account-box">
+            <span class="tiny-label">Account</span>
+            <strong id="accountName">gmail.local</strong>
+            <small id="accountMode">Static demo mode</small>
+          </div>
+        </aside>
+
+        <section class="message-list" aria-label="Message list">
+          <div class="list-header">
+            <span>From</span>
+            <span>Subject</span>
+            <span>Date</span>
+          </div>
+          <div id="messages" class="messages"></div>
+        </section>
+
+        <article class="reader" aria-label="Selected message">
+          <header class="reader-head">
+            <h1 id="mailSubject"></h1>
+            <dl>
+              <div><dt>From:</dt><dd id="mailFrom"></dd></div>
+              <div><dt>To:</dt><dd>you@gmail.com</dd></div>
+              <div><dt>Date:</dt><dd id="mailDate"></dd></div>
+            </dl>
+          </header>
+          <div class="mail-body-wrap">
+            <div id="mailBody" class="mail-body"></div>
+            <iframe id="mailBodyFrame" class="mail-body-frame" title="Message content" sandbox="allow-same-origin allow-popups" hidden></iframe>
+          </div>
+        </article>
+      </div>
+
+      <footer class="statusbar">
+        <span id="statusText">Ready</span>
+        <span id="apiStatus">Gmail API: not connected</span>
+        <span>Static demo - sample data</span>
+      </footer>
+    </section>
+  </main>
+  <dialog id="composeDialog" class="compose-dialog">
+    <form method="dialog" class="compose-window">
+      <header class="titlebar">
+        <div class="title-left"><span class="app-icon" aria-hidden="true"></span><span id="composeTitle">New Message</span></div>
+        <div class="window-buttons"><button value="cancel" aria-label="Close" formnovalidate></button></div>
+      </header>
+      <div class="compose-fields">
+        <label>To:<input id="composeTo" type="email"></label>
+        <label>Subject:<input id="composeSubject" type="text"></label>
+        <label class="compose-body-label">Message:<textarea id="composeBody"></textarea></label>
+      </div>
+      <footer class="compose-actions">
+        <button value="send" id="sendMessage">Send</button>
+        <button value="cancel" formnovalidate>Cancel</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog id="aboutDialog" class="about-dialog">
+    <div class="compose-window">
+      <header class="titlebar">
+        <div class="title-left"><span class="app-icon" aria-hidden="true"></span><span>About Retro Mail 95</span></div>
+        <div class="window-buttons"><button data-dialog-close="aboutDialog" aria-label="Close"></button></div>
+      </header>
+      <div class="about-body">
+        <p><strong>Retro Mail 95</strong></p>
+        <p>A Windows 95 style Gmail client that runs entirely on your own machine.</p>
+        <p>Read, send, reply, forward, archive and star. No delete, by design.</p>
+      </div>
+      <footer class="compose-actions"><button data-dialog-close="aboutDialog">OK</button></footer>
+    </div>
+  </dialog>
+
+  <dialog id="closeDialog" class="about-dialog">
+    <div class="compose-window">
+      <header class="titlebar">
+        <div class="title-left"><span class="app-icon" aria-hidden="true"></span><span>Retro Mail 95</span></div>
+      </header>
+      <div class="about-body"><p>Do you want to close Retro Mail 95?</p></div>
+      <footer class="compose-actions">
+        <button id="confirmClose">Yes</button>
+        <button data-dialog-close="closeDialog">No</button>
+      </footer>
+    </div>
+  </dialog>
+
+  <div id="closedScreen" class="closed-screen" hidden>
+    <button type="button" id="reopenApp" class="desktop-icon" title="Double-click to open">
+      <span class="desktop-icon-glyph" aria-hidden="true"></span>
+      <span class="desktop-icon-label">Retro Mail 95</span>
+    </button>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
