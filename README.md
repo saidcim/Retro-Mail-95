@@ -33,7 +33,7 @@ Modern email clients are often too plain and simple; while this might appeal to 
 
 ## Try the demo
 
-The [live demo](https://YOUR-USERNAME.github.io/retro-mail-95/) is the same frontend running on sample messages, so you can click through folders, open mail, search, star, archive and compose without connecting an account.
+The [live demo](https://saidcim.github.io/Retro-Mail-95/) is the same frontend running on sample messages, so you can click through folders, open mail, search, star, archive and compose without connecting an account.
 
 ## How to setup
 
