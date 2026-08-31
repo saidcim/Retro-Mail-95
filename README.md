@@ -2,7 +2,7 @@
 
 A Gmail client that looks like it shipped on a floppy disk in 1995 — and runs entirely on your own machine.
 
-**[Live demo](https://YOUR-USERNAME.github.io/retro-mail-95/)** · sample data, no login required
+**[Live demo](https://saidcim.github.io/Retro-Mail-95/)** · sample data, no login required
 
 ![Retro Mail 95](docs/screenshot.png)
 
