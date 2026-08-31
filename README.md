@@ -2,50 +2,40 @@
 
 A Gmail client that looks like it shipped on a floppy disk in 1995 — and runs entirely on your own machine.
 
-**[Live demo](https://saidcim.github.io/Retro-Mail-95/)** · sample data, no login required
+**[Live demo](https://saidcim.github.io/Retro-Mail-95/)**
 
 ![Retro Mail 95](docs/screenshot.png)
 
 ## What it is
 
-Retro Mail 95 is a local-first Gmail client with a pixel-faithful Windows 95 interface: beveled buttons, a blue title bar, a working menu bar, a folder pane, a reading pane and a status bar. Behind the nostalgia it is a real mail client — it talks to the Gmail API over OAuth 2.0 and can read, search, send, reply, forward, archive, star and mark messages.
-
-The whole backend is a single Python file with **zero third-party dependencies** — just the standard library. No Node build step, no framework, no `pip install`. Clone it, drop in your Google OAuth credentials, double-click, and it opens in your browser.
+Retro Mail 95 is a fully local email viewer I designed based on my own tastes, drawing inspiration from Windows 95. It connects to your email via the Gmail API, allowing you to read, search, send, reply, forward, archive, star, and mark messages. It requires no third-party dependencies; it runs via a single Python script and opens in your browser.
 
 ## Why
 
-Two ideas, one project:
-
-- **The interface.** Modern mail clients are flat, infinite and busy. A 1995 interface is dense, obvious and instantly readable — every button looks like a button. It is a nice reminder that "old" is not the same as "worse".
-- **The trust model.** Your mail never touches a server that isn't yours. OAuth tokens are written to `token.json` next to the script, the HTTP server binds to `localhost` only, and there is deliberately **no delete and no trash** — the app cannot destroy anything in your mailbox, no matter what goes wrong.
+Modern email clients are often too plain and simple; while this might appeal to some—or even most—users, it triggers my attachment to retro style. Besides, being old doesn't always mean being bad—never judge a book by its cover :)
 
 ## Features
 
-- Windows 95 UI — title bar controls (minimize / maximize / close to a desktop icon), dropdown menus, toolbar, status bar
-- Full Gmail folders: Inbox, Starred, Sent, Drafts, Spam, Archive, All Mail, with live unread counts
-- Read plain-text and HTML mail — HTML is sanitized and rendered in a sandboxed iframe, with inline images inlined as data URLs
-- Server-side Gmail search, plus paging with "Load older messages"
-- Compose, reply and forward through the Gmail send API
-- Archive, star / unstar, mark read / unread
+- All buttons are operational and fully functional: Archive, star/unstar, mark as read/unread.
+- We also have the same folders here as in Gmail: Inbox, Starred, Sent, Drafts, Spam, Archive, All Mail.
+- There is no problem with displaying HTML emails either. both plain-text and HTML mail are readable
 - Auto-refresh polling for new mail (toggleable), pauses when the tab is hidden or a compose window is open
-- Keyboard navigation (arrow keys) and printable messages
-- Read-only-safe by design: `gmail.modify` + `gmail.send` scopes, no delete path anywhere in the code
-
-## Tech
+- Navigation can be done by using arrow keys on the keyboard
+- We can compose, reply to, and forward messages using the Gmail API.
 
 | Layer | Stack |
 | --- | --- |
-| Frontend | Vanilla HTML, CSS and JavaScript — no framework, no bundler |
+| Frontend | Vanilla HTML, CSS and JavaScript  |
 | Backend | Python 3 standard library only (`http.server`, `urllib`, `base64`, `email`) |
-| Auth | Google OAuth 2.0 desktop flow, loopback redirect on `localhost` |
+| Auth | Google OAuth 2.0 desktop flow |
 | API | Gmail REST API v1 (`gmail.modify`, `gmail.send`) |
-| Hosting | None — it runs on your machine |
+| Hosting | it runs local |
 
 ## Try the demo
 
 The [live demo](https://YOUR-USERNAME.github.io/retro-mail-95/) is the same frontend running on sample messages, so you can click through folders, open mail, search, star, archive and compose without connecting an account.
 
-## Run it for real
+## How to setup
 
 **Requirements:** Python 3.8+ and a Google account.
 
@@ -65,28 +55,25 @@ The [live demo](https://YOUR-USERNAME.github.io/retro-mail-95/) is the same fron
 
 After you approve access, `token.json` is created next to the script. That file is your local session — it is git-ignored and should never be shared.
 
-> **Note on the 7-day token:** while the consent screen is in *Testing* mode, Google expires refresh tokens after 7 days. The app detects this, deletes the stale token and asks you to reconnect. To stop the repeat logins, press **PUBLISH APP** on the OAuth consent screen to move it to *Production* (verification is not required — click *Advanced → Go to Retro Mail 95* on the warning screen).
+> **Note regarding the 7-day token:** When the consent screen is in *Testing* mode, Google invalidates refresh tokens after 7 days. The application detects this, deletes the expired token, and prompts you to reconnect. To avoid the need to constantly log in again, switch the application to *Production* mode by clicking the **PUBLISH APP** button on the OAuth consent screen (verification is not required; simply click *Advanced* → *Go to Retro Mail 95* on the warning screen).
 
 ## Project layout
 
 ```text
-index.html            Retro interface
+index.html            interface
 styles.css            Windows 95 look
-app.js                Mail list, search, reading pane, menus, auto-refresh
-server.py             Local server: OAuth, Gmail API, mail actions
-start-retro-mail.bat  Windows launcher
-docs/                 Static demo published on GitHub Pages
+app.js                Mail list, search, reading pane, menu, auto-refresh
+server.py             Local server
+start-retro-mail.bat  launcher
+docs/                 Static demo
 credentials.json      Your Google OAuth file (git-ignored, you provide it)
 token.json            Created after first login (git-ignored, never share)
 ```
-
+> **Reminder:** You need to add the credentials.json and token.json files yourself; the others are provided.
+> 
 ## Privacy
-
-- No hosted backend, no analytics, no telemetry.
 - The server binds to `localhost` and is only reachable from your computer.
 - `credentials.json` and `token.json` are in `.gitignore` and never leave your disk.
-- The Gmail scopes requested cannot delete mail or empty the trash.
-
 ## License
 
 MIT
